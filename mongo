@@ -1,0 +1,74 @@
+## ------------- commands ------------- ##
+
+
+mongo --version
+
+mongo "mongodb+srv://sandbox.HOST.mongodb.net/sample_airbnb" --username some-username   # connect to your server through mongo shell client
+
+
+
+mongodump --uri "<Atlas Cluster URI>"	# Exports data in BSON
+
+Example: mongodump --uri "mongodb+srv://some-username:some-password@sandbox.HOST.mongodb.net/sample_airbnb"
+
+
+mongoexport --uri "<Atlas Cluster URI>"
+            --collection=<colleciton name>
+            --out=<filename>.json	# Exports data in JSON
+
+
+mongorestore --uri "<Atlas Cluster URI>"
+             --drop dump	# Imports data in BSON dump
+
+mongoimport --uri "<Atlas Cluster URI>"
+            --drop=<filename>.json	#Imports data in JSON
+
+
+
+
+
+
+
+## ------------- query ------------- ##
+
+
+show dbs
+use <db name>
+show collections
+
+db.<collection>.find( {"field":"value", "field":"value", ...} )
+                                                               .count()
+                                                               .pretty()
+
+db.<collection>.findOne()       # finds one random document
+
+db.<collection>.insert({})      # inserts just one document
+
+db.<collection>.insert([{},{},{},...])      # inserts many documents
+
+db.<collection>.insert([{},{},{},...], {"ordered": false})      # inserts many documents unorderly so the insert errors won't stop the insert operations
+
+db.<collection>.updateOne()       # wether updates the single found result, or updates the first found in a result set
+db.<collection>.updateMany()      # updates all the result set
+
+db.<collection>.updateMany({ "city": "HUDSON" }, { "$inc": { "pop": 10 } })       # first part is the search criteria, second part is for update command
+
+$inc, $set, $push      # increment, set, pushing a new document
+
+
+db.grades.updateOne({"student_id": 250, "class_id": 339 },push": { "scores": {"type": "extra credit", "score": 100 }}})   
+--> # "scores" is an array of objects in the found document from grades, here we are adding another object(as a document) to "scores" array
+
+db.<collection>.deleteOne() 
+db.<collection>.deleteMany()
+
+db.<collection>.drop()      # deletes the whole collection from database
+
+
+
+
+
+
+
+
+

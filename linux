@@ -1,0 +1,1 @@
+shuf -i 1-10000 -n 1 -o /data.txt [-o=output , -n=numbe of creation , -i=range ]       # creates a random number
