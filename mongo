@@ -64,8 +64,11 @@ db.<collection>.deleteMany()
 
 db.<collection>.drop()      # deletes the whole collection from database
 
+db.<collection>.find({ "field1":{"$lt":"value1"}, "field2":{"$gt":"value2"}, ... })       # $eq, $ne, $lt, $lte, $gt, $gte (comparison operators)
 
+db.<collection>.find({ "<operator>": [{"f":"v"}, {"f":"v"}, ...] })       # $and, $or, $nor, $not (logical operator)
 
+e.g. --> db.routes.find({ $and: [ {$or:[{'src_airport':'KZN'}, {'dst_airport':'KZN'}]}, {$or:[{'airplane':'CR2'}, {'airplane':'A81'}]} ] })
 
 
 
