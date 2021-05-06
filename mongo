@@ -74,4 +74,3 @@ e.g. --> db.routes.find({ $and: [ {$or:[{'src_airport':'KZN'}, {'dst_airport':'K
 
 
 
-
