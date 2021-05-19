@@ -56,7 +56,7 @@ db.<collection>.updateMany({ "city": "HUDSON" }, { "$inc": { "pop": 10 } })     
 $inc, $set, $push      # increment, set, pushing a new document
 
 
-db.grades.updateOne({"student_id": 250, "class_id": 339 },push": { "scores": {"type": "extra credit", "score": 100 }}})   
+db.grades.updateOne({"student_id": 250, "class_id": 339 }, push": { "scores": {"type": "extra credit", "score": 100 }}})   
 --> # "scores" is an array of objects in the found document from grades, here we are adding another object(as a document) to "scores" array
 
 db.<collection>.deleteOne() 
@@ -64,11 +64,31 @@ db.<collection>.deleteMany()
 
 db.<collection>.drop()      # deletes the whole collection from database
 
-db.<collection>.find({ "field1":{"$lt":"value1"}, "field2":{"$gt":"value2"}, ... })       # $eq, $ne, $lt, $lte, $gt, $gte (comparison operators)
+db.<collection>.find({ "field1": {"$lt":"value1"}, "field2": {"$gt":"value2"}, ... })       # $eq, $ne, $lt, $lte, $gt, $gte (comparison operators)
 
 db.<collection>.find({ "<operator>": [{"f":"v"}, {"f":"v"}, ...] })       # $and, $or, $nor, $not (logical operator)
 
 e.g. --> db.routes.find({ $and: [ {$or:[{'src_airport':'KZN'}, {'dst_airport':'KZN'}]}, {$or:[{'airplane':'CR2'}, {'airplane':'A81'}]} ] })
+
+db.<collection>.find({ "$expr": { "$eq": [ "$field1", "$field2"] }})       # $expr expression operator
+
+
+db.<collection>.find({  expr":{ 
+ 			"$and":[ 
+				{ "$gt": [ "$field1", 1200 ]},
+                         	{ "$eq": [ "$field2", "$field3" ]}
+                        ]
+		 }
+	      }).count()
+
+
+
+
+
+
+
+
+
 
 
 
