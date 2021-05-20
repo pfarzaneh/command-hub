@@ -93,6 +93,18 @@ db.<collection>.find({"array_field": {$all: ["v1","v2","v3"]} })     # finds all
 db.<collection>.find({"array_field": {$size:20, $all: ["v1","v2","v3"]} })  
 # finds all documents which "array_field" contain exactly 20 items and have "v1", "v2", "v3" as part of their values in whatever order
 
+db.<collection>.find( { {<query>},{<query>} }, {<projection>} )       # project specified fields
+
+e.g. --> db.listingsAndReviews.find({"amenities":"Wifi"}, {"price":1, "address":1, "_id":0})       # result set only contains "price" and "address" fields
+
+db.<collection>.find( {<query>},  { "array_field":{ $elemMatch:{ "sub_doc_field":"value" } }  } )
+# find documents based on query and projects only array_field.sub_doc_fields contain specified value
+
+db.<collection>.find( { "array_field":{ $elemMatch:{ "sub_doc_field":"value" } }  } )   # this sub_doc_field is the basis of search
+
+
+
+
 
 
 
