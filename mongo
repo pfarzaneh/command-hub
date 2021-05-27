@@ -73,8 +73,8 @@ e.g. --> db.routes.find({ $and: [ {$or:[{'src_airport':'KZN'}, {'dst_airport':'K
 db.<collection>.find({ "$expr": { "$eq": [ "$field1", "$field2"] }})       # $expr expression operator
 
 
-db.<collection>.find({  expr":{ 
- 			"$and":[ 
+db.<collection>.find({  $expr":{ 
+ 			$and:[ 
 				{ "$gt": [ "$field1", 1200 ]},
                          	{ "$eq": [ "$field2", "$field3" ]}
                         ]
@@ -102,10 +102,14 @@ db.<collection>.find( {<query>},  { "array_field":{ $elemMatch:{ "sub_doc_field"
 
 db.<collection>.find( { "array_field":{ $elemMatch:{ "sub_doc_field":"value" } }  } )   # this sub_doc_field is the basis of search
 
+db.<collection>.find({ "field.sub_doc_field1.sub_doc_field2.sub_doc_field3": "value" })       # using dot(.) notation we can address sub document fields to any level
 
 
+e.g.  --> db.companies.find({ "relationships.0.person.first_name": "Mark", "relationships.0.title": { "$regex": "CEO" } },{ "name": 1 })
+# relationships.0 --> 0 refers to the first element in the list of relationships' items
+# $regex is regular expresion operator matching through values
 
-
+e.g. --> db.companies.find({ "relationships":{ "$elemMatch": { "is_past": true,"person.first_name": "Mark" } } },{ "name": 1 }).count()
 
 
 
