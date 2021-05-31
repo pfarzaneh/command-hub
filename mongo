@@ -112,4 +112,20 @@ e.g.  --> db.companies.find({ "relationships.0.person.first_name": "Mark", "rela
 e.g. --> db.companies.find({ "relationships":{ "$elemMatch": { "is_past": true,"person.first_name": "Mark" } } },{ "name": 1 }).count()
 
 
+db.<collection>.aggregate([ {'1st stage of pipeline'}, {'2nd stage'}, {'3rd stage'}, ... ])       # aggregate command shapes data the way we want
+
+e.g. --> db.listingsAndReviews.aggregate([
+                                  { "$match": { "amenities": "Wifi" } },
+                                  { "$project": { "price": 1, "address": 1, "_id": 0 }}
+			       ]).pretty()
+
+e.g. --> db.listingsAndReviews.aggregate([
+                                  { "$match":   { "amenities": "Wifi" } },
+                                  { "$project": { "address": 1, "_id": 0 }},
+				  { "$group":   { "_id": "$address.country", "count": { "$sum": 1 } } }
+			       ]).pretty()
+
+
+
+
 
