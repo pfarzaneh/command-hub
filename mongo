@@ -56,7 +56,7 @@ db.<collection>.updateMany({ "city": "HUDSON" }, { "$inc": { "pop": 10 } })     
 $inc, $set, $push      # increment, set, pushing a new document
 
 
-db.grades.updateOne({"student_id": 250, "class_id": 339 }, push": { "scores": {"type": "extra credit", "score": 100 }}})   
+db.grades.updateOne({"student_id": 250, "class_id": 339 }, $push: { "scores": {"type": "extra credit", "score": 100 }}})   
 --> # "scores" is an array of objects in the found document from grades, here we are adding another object(as a document) to "scores" array
 
 db.<collection>.deleteOne() 
@@ -109,7 +109,7 @@ e.g.  --> db.companies.find({ "relationships.0.person.first_name": "Mark", "rela
 # relationships.0 --> 0 refers to the first element in the list of relationships' items
 # $regex is regular expresion operator matching through values
 
-e.g. --> db.companies.find({ "relationships":{ "$elemMatch": { "is_past": true,"person.first_name": "Mark" } } },{ "name": 1 }).count()
+e.g. --> db.companies.find({ "relationships":{ "$elemMatch": { "is_past": true, "person.first_name": "Mark" } } },{ "name": 1 }).count()
 
 
 db.<collection>.aggregate([ {'1st stage of pipeline'}, {'2nd stage'}, {'3rd stage'}, ... ])       # aggregate command shapes data the way we want
@@ -125,6 +125,17 @@ e.g. --> db.listingsAndReviews.aggregate([
 				  { "$group":   { "_id": "$address.country", "count": { "$sum": 1 } } }
 			       ]).pretty()
 
+db.<collection>.find({ '...' }).sort({ "f1":1, "f2":-1, ... }).limit(n)       # sort and limit are cursor methods, like pretty and count. 1 means ascending, -1 is descending
+
+db.<collection>.createIndex({ "field":1 })       # create an index on specified field in ascending order
+
+db.<collection>.createIndex({ "f1":1, "f2":-1, ... })       # create a compound index
+
+db.<collection>.updateOne({'query criteria'}, {'update criteria'}, {"upsert":true})       # default value of upsert is false. If it set to true in an update statement, then either 
+
+e.g. --> db.iot.updateOne({ "sensor": r.sensor, "date": r.date, valcount": { "$lt": 48 } },
+                          { $push: { "readings": { "v": r.value, "t": r.time } }, $inc: { "valcount": 1, "total": r.value } },
+                          { "upsert": true })
 
 
 
