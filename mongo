@@ -36,6 +36,8 @@ show dbs
 use <db name>
 show collections
 
+db.createCollection("employees")       # create a new collection in the db
+
 db.<collection>.find( {"field":"value", "field":"value", ...} )
                                                                .count()
                                                                .pretty()

@@ -1,0 +1,9 @@
+mongod   #starts the daemon with default configs
+
+mongo   #starts the mongo shell and tries to connect to localhost:27017
+
+use admin   #required for issuing administrative commands
+
+db.shutdownServer()   #stops mongod daemon
+
+
