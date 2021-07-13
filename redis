@@ -1,0 +1,24 @@
+logical database are 0-index based namespaces to seperate key spaces. 
+but Redis has some restrictions on them. notably, Redis cluster only supports database 0.
+
+- SET key value [EX seconds] [PX milliseconds] [NX|XX]
+	-> NX set if the key already not exists. XX set if the key already exist.
+
+- GET key
+
+- KEYS pattern   # searches for a key based on given pattern. it blocks database until iterated over all keys
+	-> so for a heavy database with millions/billions of entries, it is not a good command
+
+- SCAN slot [MATCH pattern] [COUNT count]   # it acts like KEYS but iterates over a cursor
+	-> slot is the number of slot to start search from. 
+	-> count is the number of keys that you want to force Redis to search through.
+	-> when executed, it may or may not return a result. but it will certainly return a slot number that you can use 
+	   in your next SCAN search. if it returns 0, then it means that there are no more keys to search through.
+
+ex.     -> SCAN 0 MATCH *key-criteria* COUNT 1000
+
+- DEL key [key] [key] ...   # it is a blocking process
+
+- UNLINK key [key] [key] ...   # unlinks the key, buy memory associated with the key reclaims by an async process
+
+- EXISTS key [key] [key] ...   
