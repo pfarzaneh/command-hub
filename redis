@@ -22,3 +22,36 @@ ex.     -> SCAN 0 MATCH *key-criteria* COUNT 1000
 - UNLINK key [key] [key] ...   # unlinks the key, buy memory associated with the key reclaims by an async process
 
 - EXISTS key [key] [key] ...   
+
+- EXPIRE key seconds
+- EXPIREAT key timestamp
+
+- PEXPIRE key milliseconds
+- PEXPIREAT key milliseconds-timestamp
+
+- TTL key   # show the expiration of the key in seconds
+- PTTL key  # in milliseconds
+
+- PERSIST key   # removes ttl
+
+- INCR key   # will create/increment the integer value of a key by 1
+- INCRBY key increment   # will increase/decrease the value of specified key by the increment value
+
+- DECR key
+- DECRBY key decrement
+
+- INCRBYFLOAT key increment
+
+- TYPE key   # shows specified key's value type
+
+- OBJECT ENCODING key   # shows the encoding of the value of this key. TYPE may be str, but meanwhile encoding is int.
+
+
+
+
+
+
+
+
+
+
