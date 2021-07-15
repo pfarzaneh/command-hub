@@ -10,7 +10,7 @@ but Redis has some restrictions on them. notably, Redis cluster only supports da
 	-> so for a heavy database with millions/billions of entries, it is not a good command
 
 - SCAN slot [MATCH pattern] [COUNT count]   # it acts like KEYS but iterates over a cursor
-	-> slot is the number of slot to start search from. 
+	-> slot is the number of slot(cursor) to start search from. 
 	-> count is the number of keys that you want to force Redis to search through.
 	-> when executed, it may or may not return a result. but it will certainly return a slot number that you can use 
 	   in your next SCAN search. if it returns 0, then it means that there are no more keys to search through.
@@ -45,6 +45,32 @@ ex.     -> SCAN 0 MATCH *key-criteria* COUNT 1000
 - TYPE key   # shows specified key's value type
 
 - OBJECT ENCODING key   # shows the encoding of the value of this key. TYPE may be str, but meanwhile encoding is int.
+
+- HSET key field value [field value] ...
+
+- HSETNX key field value [field value] ...
+
+- HEXISTS key field   # returnd 0/1
+
+- HGET key field
+
+- HMGET key field [field] ...   # retrieves a set of fields specified for the given key
+
+- HGETALL key
+
+- HSCAN key cursor [MATCH pattern] [COUNT count]
+
+- HDEL key field [field] ...
+
+- HINCRBY key field increment
+
+- HINCRBYFLOAT key field increment
+
+- HKEYS key   # returns all the fields' names of 
+
+- HVALS key   # returns all fields' values of the specified key
+
+- HDEL key field
 
 
 
